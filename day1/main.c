@@ -9,6 +9,7 @@
  */
 
 #define DEBUG_PRINT
+#undef DEBUG_PRINT
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -67,7 +68,10 @@ int main(int argc, char **argv)
 
     int line_count = count_lines(puzzle_file);
     size_t array_size = sizeof(int) * line_count;
+
+#ifdef DEBUG_PRINT
     printf("Line count: %d\n", line_count);
+#endif
 
     int *left_numbers = (int *)malloc(array_size);
     int *right_numbers = (int *)malloc(array_size);
@@ -82,7 +86,14 @@ int main(int argc, char **argv)
         printf("%d - %d\n", left_numbers[i], right_numbers[i]);
 #endif
 
-    solve_day1(left_numbers, right_numbers, line_count);
+    int a = solve_day1_part1(left_numbers, right_numbers, line_count);
+    printf("Solution Day 1, Part 1: %d\n", a);
+
+#ifdef DEBUG_PRINT
+    printf("After sort\n");
+    for (int i = 0; i < line_count; i++)
+        printf("%d - %d\n", left_numbers[i], right_numbers[i]);
+#endif
 
     fclose(puzzle_file);
 
