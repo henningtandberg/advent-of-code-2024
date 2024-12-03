@@ -1,6 +1,6 @@
 .text
 .extern _sort
-.global _solve_day1_part1
+.global _solve_day1_part1, _solve_day1_part2
 
 ; x0 = left_numbers
 ; x1 = right_numbers
@@ -49,6 +49,51 @@ end_abs:
     ; 3. return sum
     mov x0, #0                  ; make sure there is no garbage
     mov w0, w5
+
+    ldp x29, x30, [sp]          ; Restore x29 and x30
+    add sp, sp, #16             ; Restore stack pointer
+
+    ret
+
+; x0 = left_numbers
+; x1 = right_numbers
+; x2 = line_count
+_solve_day1_part2:
+
+    sub sp, sp, #16             ; prepare space on stack
+    stp x29, x30, [sp]          ; Save x29 (frame pointer) and x30 (link register)
+    add x29, sp, 0              ; Set up frame pointer
+
+    mov x3, x0                  ; save start of int *left_numbers
+    mov x4, x1                  ; save start of int *right_numbers
+    mov x5, x2                  ; i
+    mov x6, x2                  ; j
+
+    mov x7, #0                  ; x8 = search number
+    mov x8, #0                  ; x9 = comparison number
+    mov x9, #0                 ; x10 = similarity score
+    mov x10, #0                 ; x11 = sum of similarity scores
+
+_L1:
+    ldr w7, [x0], #4            ; x3 = *left_numbers++
+    mov x1, x4                  ; reset right_numbers
+    mov x6, x5                  ; reset counter
+_L2:
+    ldr w8, [x1], #4            ; x4 = *right_numbers++
+    cmp w7, w8
+    bne _do_not_add
+    add w9, w9, w8
+_do_not_add:
+    subs x6, x6, #1             ; decrement line_count by 1
+    bne _L2                     ; jump to _L0 if greater than 0
+    add w10, w10, w9
+    mov w9, #0
+    subs x2, x2, #1
+    bne _L1
+
+    ; 3. return sum
+    mov x0, #0                  ; make sure there is no garbage
+    mov w0, w10
 
     ldp x29, x30, [sp]          ; Restore x29 and x30
     add sp, sp, #16             ; Restore stack pointer

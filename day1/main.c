@@ -86,8 +86,11 @@ int main(int argc, char **argv)
         printf("%d - %d\n", left_numbers[i], right_numbers[i]);
 #endif
 
-    int a = solve_day1_part1(left_numbers, right_numbers, line_count);
-    printf("Solution Day 1, Part 1: %d\n", a);
+    int solution_day1_part1 = solve_day1_part1(left_numbers, right_numbers, line_count);
+    printf("Solution Day 1, Part 1: %d\n", solution_day1_part1);
+
+    int solution_day1_part2 = solve_day1_part2(left_numbers, right_numbers, line_count);
+    printf("Solution Day 1, Part 2: %d\n", solution_day1_part2);
 
 #ifdef DEBUG_PRINT
     printf("After sort\n");
