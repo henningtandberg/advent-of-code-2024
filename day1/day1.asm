@@ -57,31 +57,31 @@ end_abs:
 
 ; x0 = left_numbers
 ; x1 = right_numbers
-; x2 = line_count
+; x2 = array length
 _solve_day1_part2:
 
     sub sp, sp, #16             ; prepare space on stack
     stp x29, x30, [sp]          ; Save x29 (frame pointer) and x30 (link register)
     add x29, sp, 0              ; Set up frame pointer
 
-    mov x3, x0                  ; save start of int *left_numbers
+    mov x3, x0                  ; save start of int *left_numbers (just in case)
     mov x4, x1                  ; save start of int *right_numbers
-    mov x5, x2                  ; i
-    mov x6, x2                  ; j
+    mov x5, x2                  ; i = array length
+    mov x6, x2                  ; j = array length
 
-    mov x7, #0                  ; x8 = search number
-    mov x8, #0                  ; x9 = comparison number
-    mov x9, #0                 ; x10 = similarity score
-    mov x10, #0                 ; x11 = sum of similarity scores
+    mov x7, #0                  ; x7 = search number
+    mov x8, #0                  ; x8 = comparison number
+    mov x9, #0                  ; x9 = similarity score
+    mov x10, #0                 ; x10 = sum of similarity scores
 
 _L1:
-    ldr w7, [x0], #4            ; x3 = *left_numbers++
-    mov x1, x4                  ; reset right_numbers
-    mov x6, x5                  ; reset counter
+    ldr w7, [x0], #4            ; w7 = *left_numbers++
+    mov x1, x4                  ; reset pointer to right_numbers
+    mov x6, x5                  ; j = array length
 _L2:
-    ldr w8, [x1], #4            ; x4 = *right_numbers++
+    ldr w8, [x1], #4            ; w8 = *right_numbers++
     cmp w7, w8
-    bne _do_not_add
+    bne _do_not_add             ;
     add w9, w9, w8
 _do_not_add:
     subs x6, x6, #1             ; decrement line_count by 1

@@ -82,6 +82,7 @@ int main(int argc, char **argv)
     create_numbers(puzzle_file, left_numbers, right_numbers);
 
 #ifdef DEBUG_PRINT
+    printf("\nBefore sort\n");
     for (int i = 0; i < line_count; i++)
         printf("%d - %d\n", left_numbers[i], right_numbers[i]);
 #endif
@@ -93,7 +94,7 @@ int main(int argc, char **argv)
     printf("Solution Day 1, Part 2: %d\n", solution_day1_part2);
 
 #ifdef DEBUG_PRINT
-    printf("After sort\n");
+    printf("\nAfter sort\n");
     for (int i = 0; i < line_count; i++)
         printf("%d - %d\n", left_numbers[i], right_numbers[i]);
 #endif
