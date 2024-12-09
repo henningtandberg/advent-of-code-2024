@@ -1,4 +1,9 @@
-﻿namespace Day4;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Day4;
 
 internal static class Program
 {
