@@ -40,10 +40,7 @@ let rec checkRules (rules : (string * string array) array) (update : string list
 
 let result =
     listOfUpdates
-    |> List.map (checkRules rules)
-    |> List.zip listOfUpdates
-    |> List.filter snd
-    |> List.map fst
+    |> List.filter (checkRules rules)
     |> List.map (fun x -> x |> List.item (List.length x / 2) |> int)
     |> List.sum
     
