@@ -7,10 +7,10 @@
 
     <ItemGroup>
         <Compile Include="Program.fs"/>
-        <Content Include="puzzle-part1-test.txt">
+        <Content Include="puzzle-test.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="puzzle-part1.txt">
+        <Content Include="puzzle.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
